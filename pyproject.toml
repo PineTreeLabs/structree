@@ -1,0 +1,53 @@
+[project]
+name = "structree"
+version = "0.1.0"
+description = "Portable, dependency-light pytree/struct infrastructure (JAX-compatible node contract)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT AND Apache-2.0"
+license-files = ["LICENSE", "LICENSES/Apache-2.0.txt"]
+authors = [
+    { name = "Jared Callaham", email = "jared.callaham@gmail.com" },
+]
+dependencies = [
+    "numpy>=1.20",
+    "typing-extensions>=4.12",
+    "pydantic>=2.11",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.13,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "mypy>=1.10",
+    "ruff>=0.15",
+    # Cross-compatibility tests
+    "archimedes>=0.4.4",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+# Mirror the structural rules used in the parent project, but exempt the
+# re-export-only package __init__ from the shadowed-builtin warnings: the public
+# API deliberately exposes ``map``/``all``/``reduce``/``filter``-style names to
+# match the JAX/Flax tree vocabulary.
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/structree/__init__.py" = ["A001", "A004"]  # intentional map/all/reduce aliases
+# _config.py keeps pydantic-idiomatic typing (Union/Type/Annotated) for
+# discriminated unions, where `X | Y` splatting from a tuple does not apply.
+"src/structree/_config.py" = ["UP006", "UP007", "UP035"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true

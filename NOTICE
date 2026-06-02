@@ -1,0 +1,30 @@
+structree
+Copyright (c) 2025-2026 Pine Tree Labs, LLC
+
+This product includes software derived from the following projects, originally
+licensed under the Apache License, Version 2.0 (see LICENSES/Apache-2.0.txt):
+
+  * JAX — Copyright (c) 2021 The JAX Authors — https://github.com/jax-ml/jax
+      Derived in: _tree_util.py, _registry.py, _flatten_util.py
+  * Flax — Copyright (c) 2024 The Flax Authors — https://github.com/google/flax
+      Derived in: _struct.py
+
+The test suite additionally ports code from:
+
+  * pybaum — Copyright (c) 2022 Janoś Gabler, Tobias Raabe — MIT
+      https://github.com/OpenSourceEconomics/pybaum
+  * JAX (as above), Apache-2.0
+      Ported in: tests/test_archimedes_compat.py
+
+Pine Tree Labs' modifications and additions are licensed under the MIT License
+(see LICENSE). The combined work is distributed under MIT AND Apache-2.0.
+
+History: this code was extracted from the `archimedes.tree` package (where the
+Pine Tree Labs portion was previously distributed under GPL-3.0-or-later) and
+relicensed by the copyright holder to MIT for standalone reuse. The tree
+topology, @struct/field, the node registry, ravel, and the pydantic-backed
+config layer (StructConfig/UnionConfig) are all carried over. The only upstream
+coupling deliberately dropped is the *casadi* dependency: ravel is reimplemented
+to be coercion-free, so it preserves symbolic array leaves via numpy dispatch
+(__array_function__) and the .dtype/.astype duck-typed surface without importing
+casadi.
