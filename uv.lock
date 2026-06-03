@@ -19,7 +19,7 @@ wheels = [
 
 [[package]]
 name = "archimedes"
-version = "0.4.4"
+version = "0.4.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "casadi", marker = "python_full_version >= '3.11'" },
@@ -28,11 +28,12 @@ dependencies = [
     { name = "osqp", marker = "python_full_version >= '3.11'" },
     { name = "pydantic", marker = "python_full_version >= '3.11'" },
     { name = "scipy", marker = "python_full_version >= '3.11'" },
+    { name = "structree", marker = "python_full_version >= '3.11'" },
     { name = "typing-extensions", marker = "python_full_version >= '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/89/d4/c4da599ea1e02699e05b55b902e2377a257490084793d1e64837fa31651a/archimedes-0.4.4.tar.gz", hash = "sha256:660d4fa80e355424485ff5e5f699213e60337ad74850b8964b9b7a7008e7f06b", size = 2287168, upload-time = "2026-02-27T19:13:55.577Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8d/5a/bc0c1d923c4f32c70314679e7d7dd755e9d8a7cce776c0f2d133eebd15e2/archimedes-0.4.5.tar.gz", hash = "sha256:80ffa8611f40ec630cb25a75c7c10190b517cb1517a68da7d9d0510666501ae7", size = 2289330, upload-time = "2026-06-03T01:53:32.1Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b3/a0/a084620dc1b76ce772dba821cb140f24ee983757d6b661867a6146fc1e69/archimedes-0.4.4-py3-none-any.whl", hash = "sha256:fafd69d366bf04c1faf8d6ce1b51974eb88da5bb0fb9e0f28f478e5f4dc4b081", size = 229901, upload-time = "2026-02-27T19:13:56.766Z" },
+    { url = "https://files.pythonhosted.org/packages/de/48/33c03107cd9a6238374d4ce6cf0220e71fe30138b5d3822be09f627f02c3/archimedes-0.4.5-py3-none-any.whl", hash = "sha256:eb8960c5131ff69d57dc8453077582d63fedf8b4f378ec2c1135acf0ab61b346", size = 211706, upload-time = "2026-06-03T01:53:30.889Z" },
 ]
 
 [[package]]
@@ -1090,7 +1091,7 @@ wheels = [
 
 [[package]]
 name = "structree"
-version = "0.1.0"
+version = "1.0.0rc1"
 source = { editable = "." }
 dependencies = [
     { name = "numpy", version = "2.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
@@ -1119,7 +1120,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "archimedes", marker = "python_full_version >= '3.11'", specifier = ">=0.4.4" },
+    { name = "archimedes", marker = "python_full_version >= '3.11'", specifier = ">=0.4.5" },
     { name = "mypy", specifier = ">=1.10" },
     { name = "pytest", specifier = ">=8" },
     { name = "ruff", specifier = ">=0.15" },

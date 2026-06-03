@@ -173,14 +173,6 @@ class TestRavel:
         assert hash(unravel) != hash(unravel3)
         assert unravel != unravel3
 
-    @pytest.mark.skip(
-        reason="archimedes.compile flattens its inputs with Archimedes' own "
-        "pytree registry, which does not recognize a structree @struct as a "
-        "node until Archimedes migrates its tree/ onto structree (shared "
-        "registry). Passing a structree struct directly as a compiled-function "
-        "argument is therefore out of scope here; the symbolic-ravel path is "
-        "covered by the tests above."
-    )
     def test_ravel_compile_with_array_static_field(self):
         @struct
         class LookupTable:
