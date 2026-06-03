@@ -15,7 +15,6 @@ from typing import (
     TYPE_CHECKING,
     Any,
     NamedTuple,
-    Optional,
     TypeVar,
     cast,
 )
@@ -32,7 +31,7 @@ if TYPE_CHECKING:
 
 
 class TreeDef(NamedTuple):
-    node_data: Optional[tuple[type, Hashable]]
+    node_data: None | tuple[type, Hashable]
     children: tuple[TreeDef, ...]
     num_leaves: int
 
@@ -64,7 +63,7 @@ NONE_DEF = TreeDef(None, (), 0)
 # Flatten/unflatten functions
 #
 def tree_flatten(
-    x: Tree, is_leaf: Optional[Callable[[Any], bool]] = None
+    x: Tree, is_leaf: Callable[[Any], bool] | None = None
 ) -> tuple[list[ArrayLike], TreeDef]:
     """
     Flatten a tree into a list of leaves and a treedef.
@@ -113,7 +112,7 @@ def tree_flatten(
 
 
 def _tree_flatten(
-    x: Tree, is_leaf: Optional[Callable[[Any], bool]]
+    x: Tree, is_leaf: Callable[[Any], bool] | None
 ) -> tuple[Iterable, TreeDef]:
     if x is None:
         return [], NONE_DEF
@@ -197,7 +196,9 @@ def _tree_unflatten(treedef: TreeDef, xs: Iterator) -> Tree:
 #
 
 
-def tree_structure(tree: Tree, is_leaf: Optional[Callable[[Any], bool]] = None) -> TreeDef:
+def tree_structure(
+    tree: Tree, is_leaf: Callable[[Any], bool] | None = None
+) -> TreeDef:
     """
     Extract the structure of a tree without the leaf values.
 
@@ -227,7 +228,7 @@ def tree_structure(tree: Tree, is_leaf: Optional[Callable[[Any], bool]] = None) 
 
 
 def tree_leaves(
-    tree: Tree, is_leaf: Optional[Callable[[Any], bool]] = None
+    tree: Tree, is_leaf: Callable[[Any], bool] | None = None
 ) -> list[ArrayLike]:
     """
     Extract all leaf values from a tree.
@@ -254,7 +255,7 @@ def tree_leaves(
     return flat
 
 
-def tree_all(tree: Tree, is_leaf: Optional[Callable[[Any], bool]] = None) -> bool:
+def tree_all(tree: Tree, is_leaf: Callable[[Any], bool] | None = None) -> bool:
     """
     Check if all leaves in the tree evaluate to True.
 
@@ -284,7 +285,7 @@ def tree_map(
     f: Callable,
     tree: T,
     *rest: tuple[T, ...],
-    is_leaf: Optional[Callable[[Any], bool]] = None,
+    is_leaf: Callable[[Any], bool] | None = None,
 ) -> T:
     """
     Apply a function to each leaf in a tree.
@@ -343,7 +344,7 @@ def tree_map(
             )
         flat.append(r_flat)
 
-    flat = [f(*args) for args in zip(*flat, strict=False)]
+    flat = [f(*args) for args in zip(*flat)]
     tree_out: T = tree_unflatten(treedef, flat)  # type: ignore
     return tree_out
 
@@ -352,7 +353,7 @@ def tree_reduce(
     function: Callable[[V, ArrayLike], V],
     tree: Tree,
     initializer: V,
-    is_leaf: Optional[Callable[[Any], bool]] = None,
+    is_leaf: Callable[[Any], bool] | None = None,
 ) -> V:
     """
     Reduce a tree to a single value using a function and initializer.

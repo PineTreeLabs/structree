@@ -229,5 +229,5 @@ def _unravel_list(indices, shapes, from_dtypes, to_dtype, arr):
     chunks = np.split(arr, indices[:-1])
     return [
         chunk.reshape(shape).astype(dtype)
-        for chunk, shape, dtype in zip(chunks, shapes, from_dtypes, strict=False)
+        for chunk, shape, dtype in zip(chunks, shapes, from_dtypes)
     ]
