@@ -11,8 +11,8 @@ import pytest
 archimedes = pytest.importorskip("archimedes", reason="archimedes not available")
 from archimedes._core import SymbolicArray, compile, sym  # noqa: E402
 
-import structree as tree
-from structree import field, struct
+import structree as tree  # noqa: E402
+from structree import field, struct  # noqa: E402
 
 
 class TestRavel:
