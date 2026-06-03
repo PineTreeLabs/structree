@@ -24,6 +24,10 @@ jobs:
     - name: Install the project
       run: uv sync --dev
 
+    - name: Force-install archimedes on Python 3.9
+      if: matrix.python-version == '3.9'
+      run: uv pip install --no-deps --ignore-requires-python archimedes
+
     - name: Run tests
       run: uv run pytest
 
