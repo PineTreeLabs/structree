@@ -13,7 +13,7 @@ class _VariantBase:
     pass
 
 
-@struct(kw_only=True)
+@struct
 class _VariantA(_VariantBase):
     param: float
 
@@ -21,7 +21,7 @@ class _VariantA(_VariantBase):
         return self.param
 
 
-@struct(kw_only=True)
+@struct
 class _VariantB(_VariantBase):
     param: float
 
