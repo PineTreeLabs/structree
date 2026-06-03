@@ -33,7 +33,7 @@ import dataclasses
 import functools
 from collections.abc import Callable
 from dataclasses import InitVar, fields, replace
-from typing import Any, Optional, TypeVar, Union
+from typing import Any, TypeVar
 
 from typing_extensions import dataclass_transform
 
@@ -55,7 +55,7 @@ T = TypeVar("T")
 def field(
     static: bool = False,
     *,
-    metadata: Optional[dict[str, Any]] = None,
+    metadata: dict[str, Any] | None = None,
     **kwargs,
 ) -> dataclasses.Field:
     """
@@ -107,7 +107,7 @@ def field(
 
 
 @dataclass_transform(field_specifiers=(field,))  # type: ignore[literal-required]
-def struct(cls: Optional[T] = None, **kwargs) -> Union[T, Callable]:
+def struct(cls: T | None = None, **kwargs) -> T | Callable:
     """
     Decorator to convert a class into a tree-compatible frozen dataclass.
 

@@ -12,7 +12,7 @@ preprocessing, and data loading happen once at construction, not at runtime.
 
 from __future__ import annotations
 
-from typing import Annotated, Literal, Optional, Type, TypeVar, Union
+from typing import Annotated, Literal, Type, TypeVar, Union
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -83,7 +83,7 @@ class StructConfig(BaseModel):
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    def __init_subclass__(cls, type: Optional[str] = None, **kwargs):
+    def __init_subclass__(cls, type: str | None = None, **kwargs):
         super().__init_subclass__(**kwargs)
         if type is not None:
             cls.__annotations__ = {"type": Literal[type], **cls.__annotations__}

@@ -66,7 +66,7 @@ from structree._tree_util import NONE_DEF
 
 def assert_flat_equal(f1, f2):
     assert len(f1) == len(f2)
-    for a, b in zip(f1, f2, strict=False):
+    for a, b in zip(f1, f2):
         if isinstance(a, np.ndarray):
             assert np.allclose(a, b)
         else:
@@ -284,6 +284,10 @@ def test_register_dataclass_metadata():
             y: float
 
 
+@pytest.mark.skipif(
+    __import__("sys").version_info < (3, 10),
+    reason="kw_only requires Python 3.10+",
+)
 def test_register_struct_decorator():
     @struct(kw_only=True)
     class Point:

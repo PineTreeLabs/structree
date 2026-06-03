@@ -15,7 +15,7 @@ from __future__ import annotations
 import dataclasses
 from collections import OrderedDict
 from collections.abc import Callable, Sequence
-from typing import Any, NamedTuple, Optional, TypeVar
+from typing import Any, NamedTuple, TypeVar
 
 Typ = TypeVar("Typ", bound=type[Any])
 
@@ -102,7 +102,7 @@ def _dict_to_iter(d: dict):
 
 
 def _dict_from_iter(keys, vals):
-    return dict(zip(keys, vals, strict=False))
+    return dict(zip(keys, vals))
 
 
 register_struct(dict, _dict_to_iter, _dict_from_iter)
@@ -110,7 +110,7 @@ register_struct(dict, _dict_to_iter, _dict_from_iter)
 
 # OrderedDict
 def _od_from_iter(keys, vals):
-    return OrderedDict(zip(keys, vals, strict=False))
+    return OrderedDict(zip(keys, vals))
 
 
 register_struct(OrderedDict, _dict_to_iter, _od_from_iter)
@@ -118,8 +118,8 @@ register_struct(OrderedDict, _dict_to_iter, _od_from_iter)
 
 def register_dataclass(
     nodetype: Typ,
-    data_fields: Optional[Sequence[str]] = None,
-    meta_fields: Optional[Sequence[str]] = None,
+    data_fields: Sequence[str] | None = None,
+    meta_fields: Sequence[str] | None = None,
     drop_fields: Sequence[str] = (),
 ) -> Typ:
     """
@@ -227,8 +227,8 @@ def register_dataclass(
             raise ValueError(msg)
 
     def unflatten_func(meta, data):
-        meta_args = tuple(zip(meta_fields, meta, strict=False))
-        data_args = tuple(zip(data_fields, data, strict=False))
+        meta_args = tuple(zip(meta_fields, meta))
+        data_args = tuple(zip(data_fields, data))
         kwargs = dict(meta_args + data_args)
         return nodetype(**kwargs)
 
