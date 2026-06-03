@@ -1,6 +1,6 @@
 [project]
 name = "structree"
-version = "0.1.0"
+version = "1.0.0rc1"
 description = "Portable, dependency-light pytree/struct infrastructure (JAX-compatible node contract)"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -25,7 +25,7 @@ dev = [
     "mypy>=1.10",
     "ruff>=0.15",
     # Cross-compatibility tests (archimedes requires Python 3.11+)
-    "archimedes>=0.4.4 ; python_version >= '3.11'",
+    "archimedes>=0.4.5 ; python_version >= '3.11'",
 ]
 
 [tool.ruff]
