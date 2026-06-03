@@ -15,7 +15,7 @@ from __future__ import annotations
 import dataclasses
 from collections import OrderedDict
 from collections.abc import Callable, Sequence
-from typing import Any, NamedTuple, TypeVar
+from typing import Any, NamedTuple, Optional, TypeVar
 
 Typ = TypeVar("Typ", bound=type[Any])
 
@@ -118,8 +118,8 @@ register_struct(OrderedDict, _dict_to_iter, _od_from_iter)
 
 def register_dataclass(
     nodetype: Typ,
-    data_fields: Sequence[str] | None = None,
-    meta_fields: Sequence[str] | None = None,
+    data_fields: Optional[Sequence[str]] = None,
+    meta_fields: Optional[Sequence[str]] = None,
     drop_fields: Sequence[str] = (),
 ) -> Typ:
     """

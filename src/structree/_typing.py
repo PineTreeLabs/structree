@@ -13,7 +13,9 @@ scalars, or a downstream library's symbolic arrays.
 
 from __future__ import annotations
 
-from typing import Any, TypeAlias
+from typing import Any
+
+from typing_extensions import TypeAlias
 
 # A leaf value. Deliberately ``Any`` — structree does not constrain leaves.
 ArrayLike: TypeAlias = Any
